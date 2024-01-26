@@ -33,14 +33,14 @@ public class ZipCodeQueryService {
 
         public String getJSON(String zipcode)
                         throws HttpClientErrorException {
-                log.info("zip code={}");
+                log.info("zipcode={}", zipcode);
                 HttpHeaders headers = new HttpHeaders();
                 headers.setAccept(List.of(MediaType.APPLICATION_JSON));
                 headers.setContentType(MediaType.APPLICATION_JSON);
 
                 HttpEntity<String> entity = new HttpEntity<>(headers);
 
-                Map<String, String> uriVariables = Map.of("zip code", zipcode);
+                Map<String, String> uriVariables = Map.of("zipcode", zipcode);
 
                 ResponseEntity<String> re = restTemplate.exchange(ENDPOINT, HttpMethod.GET, entity, String.class,
                                 uriVariables);

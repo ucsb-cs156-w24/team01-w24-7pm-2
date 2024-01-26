@@ -32,7 +32,7 @@ public class ZipCodeController {
     public ResponseEntity<String> getZipCodes(
             @Parameter(name = "zipcode", example = "93106") @RequestParam String zipcode)
             throws JsonProcessingException {
-        log.info("getZipCodes: zip code={}", zipcode);
+        log.info("getZipCodes: zipcode={}", zipcode);
         String result = ZipCodeQueryService.getJSON(zipcode);
         return ResponseEntity.ok().body(result);
     }

@@ -1,11 +1,11 @@
 package edu.ucsb.cs156.spring.backenddemo.services;
 
-import java.net.http.HttpHeaders;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

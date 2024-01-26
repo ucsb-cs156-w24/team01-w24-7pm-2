@@ -21,29 +21,30 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class ZipCodeQueryService {
 
-    ObjectMapper mapper = new ObjectMapper();
+        ObjectMapper mapper = new ObjectMapper();
 
-    private final RestTemplate restTemplate;
+        private final RestTemplate restTemplate;
 
-    public ZipCodeQueryService(RestTemplateBuilder restTemplateBuilder) {
-        restTemplate = restTemplateBuilder.build();
-    }
+        public ZipCodeQueryService(RestTemplateBuilder restTemplateBuilder) {
+                restTemplate = restTemplateBuilder.build();
+        }
 
-    public static final String ENDPOINT = "http://api.zippopotam.us/us/{zipcode}";
+        public static final String ENDPOINT = "http://api.zippopotam.us/us/{zipcode}";
 
-    public String getJSON(String zipcode) throws HttpClientErrorException {
-        log.info("zip code={}", zipcode);
-        HttpHeaders headers = new HttpHeaders();
-        headers.setAccept(List.of(MediaType.APPLICATION_JSON));
-        headers.setContentType(MediaType.APPLICATION_JSON);
+        public String getJSON(String zipcode)
+                        throws HttpClientErrorException {
+                log.info("zip code={}");
+                HttpHeaders headers = new HttpHeaders();
+                headers.setAccept(List.of(MediaType.APPLICATION_JSON));
+                headers.setContentType(MediaType.APPLICATION_JSON);
 
-        Map<String, String> uriVariables = Map.of("zip code", zipcode);
+                HttpEntity<String> entity = new HttpEntity<>(headers);
 
-        HttpEntity<String> entity = new HttpEntity<>("body", headers);
+                Map<String, String> uriVariables = Map.of("zip code", zipcode);
 
-        ResponseEntity<String> re = restTemplate.exchange(ENDPOINT, HttpMethod.GET, entity, String.class,
-                uriVariables);
-        return re.getBody();
-    }
+                ResponseEntity<String> re = restTemplate.exchange(ENDPOINT, HttpMethod.GET, entity, String.class,
+                                uriVariables);
+                return re.getBody();
+        }
 
 }

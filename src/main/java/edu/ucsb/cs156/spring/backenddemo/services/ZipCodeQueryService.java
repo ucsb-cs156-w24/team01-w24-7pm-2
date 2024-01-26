@@ -1,11 +1,11 @@
 package edu.ucsb.cs156.spring.backenddemo.services;
 
+import java.net.http.HttpHeaders;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -31,19 +31,15 @@ public class ZipCodeQueryService {
 
     public static final String ENDPOINT = "http://api.zippopotam.us/us/{zipcode}";
 
-    public String getJSON(String postcode, String country, String countryabbreviation, String places)
-            throws HttpClientErrorException {
-        log.info("post code={}, country={}, country abbreviation={}, places={}", postcode, country, countryabbreviation,
-                places);
+    public String getJSON(String zipcode) throws HttpClientErrorException {
+        log.info("zip code={}", zipcode);
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(List.of(MediaType.APPLICATION_JSON));
         headers.setContentType(MediaType.APPLICATION_JSON);
 
-        HttpEntity<String> entity = new HttpEntity<>(headers);
+        Map<String, String> uriVariables = Map.of("zip code", zipcode);
 
-        Map<String, String> uriVariables = Map.of("post code", postcode, "country", country, "country abbreviation",
-                countryabbreviation,
-                "places", places);
+        HttpEntity<String> entity = new HttpEntity<>("body", headers);
 
         ResponseEntity<String> re = restTemplate.exchange(ENDPOINT, HttpMethod.GET, entity, String.class,
                 uriVariables);

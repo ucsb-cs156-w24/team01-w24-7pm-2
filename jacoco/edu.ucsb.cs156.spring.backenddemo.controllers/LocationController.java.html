@@ -2,8 +2,37 @@
 
 import org.springframework.web.bind.annotation.RestController;
 
+import edu.ucsb.cs156.spring.backenddemo.services.LocationQueryService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+@Tag(name=&quot;Locations from https://nominatim.openstreetmap.org/&quot;)
 @RestController
-<span class="fc" id="L6">public class LocationController {</span>
+@RequestMapping(&quot;/api/locations&quot;)
+<span class="fc" id="L22">public class LocationController {</span>
     
+<span class="fc" id="L24">    ObjectMapper mapper = new ObjectMapper();</span>
+
+    @Autowired
+    LocationQueryService locationQueryService;
+
+    @Operation(summary = &quot;Get a list of locations&quot;, description = &quot;JSON return format documented here: https://nominatim.openstreetmap.org/&quot;)
+    @GetMapping(&quot;/get&quot;)
+    public ResponseEntity&lt;String&gt; getLocation(
+        @Parameter(name=&quot;location&quot;, description=&quot;location&quot;, example=&quot;Isla Vista&quot;) @RequestParam String location
+    ) throws JsonProcessingException {
+<span class="fc" id="L34">        String result = locationQueryService.getJSON(location);</span>
+<span class="fc" id="L35">        return ResponseEntity.ok().body(result);</span>
+    }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

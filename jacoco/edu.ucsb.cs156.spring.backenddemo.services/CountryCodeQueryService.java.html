@@ -3,12 +3,6 @@
 import java.util.List;
 import java.util.Map;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import org.springframework.web.client.RestTemplate;
-
-import lombok.extern.slf4j.Slf4j;
-
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -17,34 +11,39 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.RestTemplate;
 
-<span class="fc" id="L21">@Slf4j</span>
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import lombok.extern.slf4j.Slf4j;
+
+<span class="fc" id="L20">@Slf4j</span>
 @Service
 public class CountryCodeQueryService {
 
-<span class="fc" id="L25">    ObjectMapper mapper = new ObjectMapper();</span>
+<span class="fc" id="L24">    ObjectMapper mapper = new ObjectMapper();</span>
 
     private final RestTemplate restTemplate;
 
-<span class="fc" id="L29">    public CountryCodeQueryService(RestTemplateBuilder restTemplateBuilder) {</span>
-<span class="fc" id="L30">        restTemplate = restTemplateBuilder.build();</span>
-<span class="fc" id="L31">    }</span>
+<span class="fc" id="L28">    public CountryCodeQueryService(RestTemplateBuilder restTemplateBuilder) {</span>
+<span class="fc" id="L29">        restTemplate = restTemplateBuilder.build();</span>
+<span class="fc" id="L30">    }</span>
 
     public static final String ENDPOINT = &quot;https://public.opendatasoft.com/api/records/1.0/search/?dataset=countries-codes&amp;q={country}&quot;;
 
     public String getJSON(String country) throws HttpClientErrorException {
-<span class="fc" id="L36">        log.info(&quot;country={}&quot;, country);</span>
-<span class="fc" id="L37">        HttpHeaders headers = new HttpHeaders();</span>
-<span class="fc" id="L38">        headers.setAccept(List.of(MediaType.APPLICATION_JSON));</span>
-<span class="fc" id="L39">        headers.setContentType(MediaType.APPLICATION_JSON);</span>
+<span class="fc" id="L35">        log.info(&quot;country={}&quot;, country);</span>
+<span class="fc" id="L36">        HttpHeaders headers = new HttpHeaders();</span>
+<span class="fc" id="L37">        headers.setAccept(List.of(MediaType.APPLICATION_JSON));</span>
+<span class="fc" id="L38">        headers.setContentType(MediaType.APPLICATION_JSON);</span>
 
-<span class="fc" id="L41">        Map&lt;String, String&gt; uriVariables = Map.of(&quot;country&quot;, country);</span>
+<span class="fc" id="L40">        Map&lt;String, String&gt; uriVariables = Map.of(&quot;country&quot;, country);</span>
 
-<span class="fc" id="L43">        HttpEntity&lt;String&gt; entity = new HttpEntity&lt;&gt;(&quot;body&quot;, headers);</span>
+<span class="fc" id="L42">        HttpEntity&lt;String&gt; entity = new HttpEntity&lt;&gt;(&quot;body&quot;, headers);</span>
 
-<span class="fc" id="L45">        ResponseEntity&lt;String&gt; re = restTemplate.exchange(ENDPOINT, HttpMethod.GET, entity, String.class,</span>
+<span class="fc" id="L44">        ResponseEntity&lt;String&gt; re = restTemplate.exchange(ENDPOINT, HttpMethod.GET, entity, String.class,</span>
                 uriVariables);
-<span class="fc" id="L47">        return re.getBody();</span>
+<span class="fc" id="L46">        return re.getBody();</span>
     }
 
 }

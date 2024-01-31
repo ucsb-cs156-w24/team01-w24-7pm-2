@@ -10,6 +10,7 @@ Lab instructions: <https://ucsb-cs156.github.io/w24/lab/team01.html>
 | Michael Wong   | michaelw1985  | `TidesQueryService`         | `TidesController`         |
 | Ashton Wong    | ashton-wong   | `UniversityQueryService`    | `UniversityController`    |
 | Andrew Gale    | andy-gale     | `ZipCodeQueryService`       | `ZipCodeController`       |
+| Kavya Verma    | Kavya75       | `LocationQueryService`      | `LocationController`      |
 ```
 
 Repo: https://github.com/ucsb-cs156-w24/team01-w24-7pm-2

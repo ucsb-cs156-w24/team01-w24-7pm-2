@@ -18,10 +18,10 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-@Tag(name = "Tide info")
+@Tag(name = "Tide info from https://api.tidesandcurrents.noaa.gov/api/prod/")
 @Slf4j
 @RestController
-@RequestMapping("/api/tides/get")
+@RequestMapping("/api/tides")
 public class TidesController {
     ObjectMapper mapper = new ObjectMapper();
 

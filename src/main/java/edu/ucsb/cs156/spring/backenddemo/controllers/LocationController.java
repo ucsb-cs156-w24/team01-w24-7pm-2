@@ -34,5 +34,4 @@ public class LocationController {
         String result = locationQueryService.getJSON(location);
         return ResponseEntity.ok().body(result);
     }
-
 }
